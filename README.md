@@ -38,8 +38,8 @@ import com.github.scfj.decorators.Cached;
 // ...
 UserApi userApi = Cached.decorate(new UsersFromDatabase("jdbc://..."));
 
-// retreive user from database, interacts with IO for the first time
+// Retreives user from database, interacts with IO for the first time.
 User firstUser = userApi.userById(1);
 // ...
-User user1 = userApi.userById(1); // no IO, user is stored in memory.
+User user1 = userApi.userById(1); // No IO, user is stored in memory.
 ```
