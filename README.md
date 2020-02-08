@@ -1,7 +1,7 @@
 # decorators
 Useful decorators implemented using pure Java.
 
-These decorators implements AOP in pure Java. No dependencies required.
+These decorators implement AOP in pure Java. No dependencies required.
 
 See usage in [tests directory](src/test/java/com/github/scfj/decorators).
 
