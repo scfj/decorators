@@ -7,6 +7,11 @@
     <groupId>com.github.scfj</groupId>
     <artifactId>decorators</artifactId>
     <version>1.0</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -16,6 +21,7 @@
                     <source>8</source>
                     <target>8</target>
                 </configuration>
+                <version>3.8.1</version>
             </plugin>
         </plugins>
     </build>
