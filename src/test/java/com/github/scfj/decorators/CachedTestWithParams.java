@@ -19,11 +19,11 @@ public class CachedTestWithParams {
     }
 
     interface CalculatorApi {
-        String add(Integer a, Integer b, String formatString);
+        String add(int a, int b, String formatString);
 
         class Fake implements CalculatorApi {
             @Override
-            public String add(Integer a, Integer b, String formatString) {
+            public String add(int a, int b, String formatString) {
                 try {
                     Thread.sleep(100 /* ms */);
                 } catch (InterruptedException e) {
