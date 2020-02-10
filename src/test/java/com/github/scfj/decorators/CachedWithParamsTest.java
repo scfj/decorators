@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class CachedTestWithParams {
+public class CachedWithParamsTest {
     CalculatorApi slow = new CalculatorApi.Fake();
     CalculatorApi fast = Cached.decorate(slow);
 
