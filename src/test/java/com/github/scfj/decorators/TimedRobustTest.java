@@ -17,7 +17,7 @@ public class TimedRobustTest {
 
     @Test
     public void shouldNotFail() throws IOException {
-        Patient robust = Robust.decorate(notRobust, 2, 100);
+        Patient robust = Robust.decorate(notRobust, 2, 105);
         assertEquals(42, robust.bePatient());
     }
 
