@@ -1,4 +1,8 @@
 # decorators
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/9fb214597ec1169e9513/maintainability)](https://codeclimate.com/github/scfj/decorators/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9fb214597ec1169e9513/test_coverage)](https://codeclimate.com/github/scfj/decorators/test_coverage)
+
 Useful decorators implemented using pure Java.
 
 These decorators implement AOP in pure Java. No dependencies required.
