@@ -15,7 +15,7 @@ Identity identity = Loggable.decorate(new Identity()); // WRONG
 // ^ casting to class, not an interface.
 
 // class LocalPictureStorage implements PictureStorage
-PictureStorage storage = Cached.decorate(new LocalPictureStorage()); // OK
+PictureStorage storage = Cache.decorate(new LocalPictureStorage()); // OK
 // ^ casting to interface.
 ```
 
@@ -29,17 +29,33 @@ object.method1(); // decorator will handle that
 ```
 
 ## Concrete examples:
-### Cached
+### Cache
 Cached decorator caches methods' calls to target. Works well\
 with immutable objects and arguments (they have constant hashCode).
 ```java
-import com.github.scfj.decorators.Cached;
+import com.github.scfj.decorators.Cache;
 
 // ...
-UserApi userApi = Cached.decorate(new UsersFromDatabase("jdbc://..."));
+UserApi userApi = Cache.decorate(new UsersFromDatabase("jdbc://..."));
 
 // Retreives user from database, interacts with IO for the first time.
 User firstUser = userApi.userById(1);
 // ...
 User user1 = userApi.userById(1); // No IO, user is stored in memory.
+```
+
+See tests [here](src/test/java/com/github/scfj/decorators/cache/CacheTest.java)
+and [here](src/test/java/com/github/scfj/decorators/cache/CacheWithParamsTest.java)
+to learn more.
+
+### Robust
+Robust decorator makes objects less fragile.
+```java
+import com.github.scfj.decorators.Robust;
+//...
+Connection connection = Robust.decorate(new PoorConnection(resource), 3);
+connection.readBytes(); // won't fail fast, it will try 3 times before throwing exception
+
+Connection connection = Robust.decorate(new PoorConnection(resource), 3, 300);
+connection.readBytes(); // try 3 times with 300 ms delay
 ```
