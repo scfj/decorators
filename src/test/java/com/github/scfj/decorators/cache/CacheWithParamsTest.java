@@ -1,12 +1,13 @@
-package com.github.scfj.decorators;
+package com.github.scfj.decorators.cache;
 
+import com.github.scfj.decorators.Cache;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class CachedWithParamsTest {
+public class CacheWithParamsTest {
     CalculatorApi slow = new CalculatorApi.Fake();
-    CalculatorApi fast = Cached.decorate(slow);
+    CalculatorApi fast = Cache.decorate(slow);
 
     @Test(timeout = 200 /* ms */)
     public void shouldBeFastWhenInvokedManyTimes() {
@@ -18,7 +19,7 @@ public class CachedWithParamsTest {
         }
     }
 
-    interface CalculatorApi {
+    public interface CalculatorApi {
         String add(int a, int b, String formatString);
 
         class Fake implements CalculatorApi {

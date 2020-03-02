@@ -1,14 +1,15 @@
-package com.github.scfj.decorators;
+package com.github.scfj.decorators.cache;
 
+import com.github.scfj.decorators.Cache;
 import org.junit.Test;
 
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
-public class CachedTest {
+public class CacheTest {
     File slow = new File.Empty();
-    File fast = Cached.decorate(slow);
+    File fast = Cache.decorate(slow);
 
     @Test(timeout = 200 /* ms */)
     public void shouldBeFastWhenInvokedManyTimes() throws IOException {
@@ -17,7 +18,7 @@ public class CachedTest {
         }
     }
 
-    interface File {
+    public interface File {
         String content() throws IOException;
 
         class Empty implements File {

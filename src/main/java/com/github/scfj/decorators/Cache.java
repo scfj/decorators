@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Cached implements InvocationHandler {
+public class Cache implements InvocationHandler {
     private final Object target;
     private Map<String, Map<Integer, Object>> cache = new HashMap<>();
 
-    private Cached(Object target) {
+    private Cache(Object target) {
         this.target = target;
     }
 
@@ -21,7 +21,7 @@ public class Cached implements InvocationHandler {
         return (T) Proxy.newProxyInstance(
                 targetClass.getClassLoader(),
                 targetClass.getInterfaces(),
-                new Cached(target)
+                new Cache(target)
         );
     }
 
@@ -50,7 +50,7 @@ public class Cached implements InvocationHandler {
 
     private Map<Integer, Object> methodCache(Method method) {
         if (!cache.containsKey(method.getName())) {
-            cache.put(method.getName(), new HashMap<>());
+            cache.put(method.getName(), new HashMap<Integer, Object>());
         }
         return cache.get(method.getName());
     }
