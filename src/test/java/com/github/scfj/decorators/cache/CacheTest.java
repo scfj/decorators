@@ -8,7 +8,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 public class CacheTest {
-    File slow = new File.Empty();
+    File slow = new File.EmptyFile();
     File fast = Cache.decorate(slow);
 
     @Test(timeout = 200 /* ms */)
@@ -21,7 +21,7 @@ public class CacheTest {
     public interface File {
         String content() throws IOException;
 
-        class Empty implements File {
+        class EmptyFile implements File {
             @Override
             public String content() throws IOException {
                 try {

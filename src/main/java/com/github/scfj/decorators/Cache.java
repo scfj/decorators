@@ -3,13 +3,12 @@ package com.github.scfj.decorators;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
+import java.util.WeakHashMap;
 
 public class Cache implements InvocationHandler {
     private final Object target;
-    private Map<String, Map<Integer, Object>> cache = new HashMap<>();
+    private final WeakHashMap<Integer, Object> cache = new WeakHashMap<>();
 
     private Cache(Object target) {
         this.target = target;
@@ -37,21 +36,18 @@ public class Cache implements InvocationHandler {
     }
 
     private boolean present(Method method, Object[] args) {
-        return methodCache(method).containsKey(Objects.hash(args));
+        return cache.containsKey(hash(method, args));
     }
 
     private Object resultFromCache(Method m, Object[] args) {
-        return methodCache(m).get(Objects.hash(args));
+        return cache.get(hash(m, args));
     }
 
     private void cache(Method m, Object[] args, Object result) {
-        methodCache(m).put(Objects.hash(args), result);
+        cache.put(hash(m, args), result);
     }
 
-    private Map<Integer, Object> methodCache(Method method) {
-        if (!cache.containsKey(method.getName())) {
-            cache.put(method.getName(), new HashMap<Integer, Object>());
-        }
-        return cache.get(method.getName());
+    private Integer hash(Method method, Object[] args) {
+        return method.hashCode() ^ Objects.hash(args);
     }
 }

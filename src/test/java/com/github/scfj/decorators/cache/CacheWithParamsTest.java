@@ -6,8 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class CacheWithParamsTest {
-    CalculatorApi slow = new CalculatorApi.Fake();
-    CalculatorApi fast = Cache.decorate(slow);
+    Calculator slow = new Calculator.Fake();
+    Calculator fast = Cache.decorate(slow);
 
     @Test(timeout = 200 /* ms */)
     public void shouldBeFastWhenInvokedManyTimes() {
@@ -19,10 +19,10 @@ public class CacheWithParamsTest {
         }
     }
 
-    public interface CalculatorApi {
+    public interface Calculator {
         String add(int a, int b, String formatString);
 
-        class Fake implements CalculatorApi {
+        class Fake implements Calculator {
             @Override
             public String add(int a, int b, String formatString) {
                 try {
